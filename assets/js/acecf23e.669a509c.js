@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunksystem_design_101_docs=self.webpackChunksystem_design_101_docs||[]).push([[1903],{1912:s=>{s.exports=JSON.parse('{"blogBasePath":"/system-design-101/blog","blogTitle":"Blog","authorsListPath":"/system-design-101/blog/authors"}')}}]);

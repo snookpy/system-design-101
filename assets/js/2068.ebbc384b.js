@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunksystem_design_101_docs=self.webpackChunksystem_design_101_docs||[]).push([[2068],{2068:(s,e,c)=>{c.d(e,{createInfoServices:()=>_.v});var _=c(1366);c(8198)}}]);
