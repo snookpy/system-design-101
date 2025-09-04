@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-load balancing/load_balancing_algorithms" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.8.1">
+<title data-rh="true">Load Balancing Algorithms | System Design Fundamentals</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://snookpy.github.io/system-design-101/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://snookpy.github.io/system-design-101/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://snookpy.github.io/system-design-101/docs/load balancing/load_balancing_algorithms"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Load Balancing Algorithms | System Design Fundamentals"><meta data-rh="true" name="description" content="Round Robin"><meta data-rh="true" property="og:description" content="Round Robin"><link data-rh="true" rel="icon" href="/system-design-101/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://snookpy.github.io/system-design-101/docs/load balancing/load_balancing_algorithms"><link data-rh="true" rel="alternate" href="https://snookpy.github.io/system-design-101/docs/load balancing/load_balancing_algorithms" hreflang="en"><link data-rh="true" rel="alternate" href="https://snookpy.github.io/system-design-101/docs/load balancing/load_balancing_algorithms" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Load Balancing Algorithms","item":"https://snookpy.github.io/system-design-101/docs/load balancing/load_balancing_algorithms"}]}</script><link rel="alternate" type="application/rss+xml" href="/system-design-101/blog/rss.xml" title="System Design Fundamentals RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/system-design-101/blog/atom.xml" title="System Design Fundamentals Atom Feed"><link rel="stylesheet" href="/system-design-101/assets/css/styles.69ddde23.css">
+<script src="/system-design-101/assets/js/runtime~main.8af8502d.js" defer="defer"></script>
+<script src="/system-design-101/assets/js/main.dcc9d343.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t="light";var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",e||t),document.documentElement.setAttribute("data-theme-choice",e||t)}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><link rel="preload" as="image" href="/system-design-101/img/logo.svg"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/system-design-101/"><div class="navbar__logo"><img src="/system-design-101/img/logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/system-design-101/img/logo.svg" alt="My Site Logo" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">System Design 101</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/system-design-101/docs/intro">Tutorial</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://github.com/snookpy" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/system-design-101/docs/intro">System design fundamentals</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/system-design-101/docs/api-gateway">API Gateway (TODO)</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/system-design-101/docs/cap-theory">CAP Theory</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/system-design-101/docs/Indexes">Indexes</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" href="/system-design-101/docs/load balancing/intro">load balancing</a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/system-design-101/docs/load balancing/intro">Load balancing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/system-design-101/docs/load balancing/load_balancing_algorithms">Load Balancing Algorithms</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/system-design-101/docs/load balancing/challenges">Scalability and Performance</a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" href="/system-design-101/docs/networks/http-vs-https">networks</a></div></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/system-design-101/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">load balancing</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Load Balancing Algorithms</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Load Balancing Algorithms</h1></header>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="round-robin">Round Robin<a href="#round-robin" class="hash-link" aria-label="Direct link to Round Robin" title="Direct link to Round Robin">​</a></h2>
+<p>Distributes requests sequentially to each server in the pool. Simple</p>
+<p><img decoding="async" loading="lazy" alt="Round Robin" src="/system-design-101/assets/images/round_robin-b4228e6c896128a9355512fa3f1ca4be.gif" width="1000" height="600" class="img_ev3q"></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pros">Pros:<a href="#pros" class="hash-link" aria-label="Direct link to Pros:" title="Direct link to Pros:">​</a></h3>
+<ul>
+<li>Ensures an equal distribution of requests among the servers, as each server gets a turn in a fixed order.</li>
+<li>Easy to implement and understand.</li>
+<li>Works well when servers have similar capacities.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cons">Cons:<a href="#cons" class="hash-link" aria-label="Direct link to Cons:" title="Direct link to Cons:">​</a></h3>
+<ul>
+<li>Ignores server load and capacity.</li>
+<li>No session affinity; clients may hit different servers that each request from the same client can be sent to a different backend server. The load balancer does not keep track of which server handled previous requests for that client. This can be a problem for applications that store user-specific data (session state) on the server.</li>
+<li>Not optimal if servers have different performance.</li>
+<li>Predictable pattern can be exploited by attackers.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-cases">Use Cases<a href="#use-cases" class="hash-link" aria-label="Direct link to Use Cases" title="Direct link to Use Cases">​</a></h3>
+<ul>
+<li><strong>Homogeneous Environments</strong>: Suitable for environments where all servers have similar capacity and performance.</li>
+<li><strong>Stateless Applications</strong>: Works well for stateless applications where each request can be handled independently.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="least-connections">Least Connections<a href="#least-connections" class="hash-link" aria-label="Direct link to Least Connections" title="Direct link to Least Connections">​</a></h2>
+<p>Load balancing technique that assigns incoming requests to the server with the fewest active connections at the time of the request.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pros-1">Pros:<a href="#pros-1" class="hash-link" aria-label="Direct link to Pros:" title="Direct link to Pros:">​</a></h3>
+<ul>
+<li><strong>Load Awareness</strong>: Takes into account the current load on each server by considering the number of active connections, leading to better utilization of server resources.</li>
+<li><strong>Dynamic Distribution</strong>: Adapts to changing traffic patterns and server loads, ensuring no single server becomes a bottleneck.</li>
+<li><strong>Efficiency in Heterogeneous Environments</strong>: Performs well when servers have varying capacities and workloads, as it dynamically allocates requests to less busy servers.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cons-1">Cons:<a href="#cons-1" class="hash-link" aria-label="Direct link to Cons:" title="Direct link to Cons:">​</a></h3>
+<ul>
+<li><strong>Higher Complexity</strong>: More complex to implement compared to simpler algorithms like Round Robin, as it requires real-time monitoring of active connections.</li>
+<li><strong>State Maintenance</strong>: Requires the load balancer to maintain the state of active connections, which can increase overhead.</li>
+<li><strong>Potential for Connection Spikes</strong>: In scenarios where connection duration is short, servers can experience rapid spikes in connection counts, leading to frequent rebalancing.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-cases-1">Use Cases<a href="#use-cases-1" class="hash-link" aria-label="Direct link to Use Cases" title="Direct link to Use Cases">​</a></h3>
+<ul>
+<li><strong>Heterogeneous servers</strong>: Good when servers have different capacities.</li>
+<li><strong>Variable traffic</strong>: Handles unpredictable or changing loads well.</li>
+<li><strong>Stateful apps</strong>: Distributes active sessions more evenly.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="comparison-to-round-robin">Comparison to Round Robin<a href="#comparison-to-round-robin" class="hash-link" aria-label="Direct link to Comparison to Round Robin" title="Direct link to Comparison to Round Robin">​</a></h3>
+<ul>
+<li><strong>Round Robin</strong>: Distributes requests in a fixed, cyclic order without considering the current load on each server.</li>
+<li><strong>Least Connections</strong>: Distributes requests based on the current load, directing new requests to the server with the fewest active connections.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Least Connections" src="/system-design-101/assets/images/least_connections-4a6a585a2393d7f6701b884d7b5c8423.gif" width="1000" height="600" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="weighted-round-robin">Weighted Round Robin<a href="#weighted-round-robin" class="hash-link" aria-label="Direct link to Weighted Round Robin" title="Direct link to Weighted Round Robin">​</a></h2>
+<p>WRR is an enhanced version of the Round Robin load balancing algorithm. It assigns weights to each server based on their capacity or performance.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pros-2">Pros:<a href="#pros-2" class="hash-link" aria-label="Direct link to Pros:" title="Direct link to Pros:">​</a></h3>
+<ul>
+<li>Distributes requests based on server capacity.</li>
+<li>Flexible—easy to adjust weights as servers change.</li>
+<li>Improves performance by avoiding overload on weaker servers.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cons-2">Cons:<a href="#cons-2" class="hash-link" aria-label="Direct link to Cons:" title="Direct link to Cons:">​</a></h3>
+<ul>
+<li>Complexity in Weight Assignment: Determining appropriate weights for each server can be challenging and requires accurate performance metrics.</li>
+<li>Increased Overhead: Managing and updating weights can introduce additional overhead, especially in dynamic environments where server performance fluctuates.</li>
+<li>Not Ideal for Highly Variable Loads: In environments with highly variable load patterns, WRR may not always provide optimal load balancing as it doesn&#x27;t consider real-time server load (its fixed weights).</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-cases-2">Use Cases<a href="#use-cases-2" class="hash-link" aria-label="Direct link to Use Cases" title="Direct link to Use Cases">​</a></h3>
+<ul>
+<li><strong>Heterogeneous Server Environments</strong>: Ideal for environments where servers have different processing capabilities, ensuring efficient use of resources.</li>
+<li><strong>Scalable Web Applications</strong>: Suitable for web applications where different servers may have varying performance characteristics.</li>
+<li><strong>Database Clusters</strong>: Useful in database clusters where some nodes have higher processing power and can handle more queries.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Weighted Round Robin" src="/system-design-101/assets/images/weighted_round_robin-03040c5c93218568c1eb56b97509f74d.gif" width="1000" height="600" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="weighted-least-connections">Weighted Least Connections<a href="#weighted-least-connections" class="hash-link" aria-label="Direct link to Weighted Least Connections" title="Direct link to Weighted Least Connections">​</a></h2>
+<p>An advanced load balancing algorithm that combines the principles of the Least Connections and Weighted Round Robin algorithms. It assigns weights to servers based on their capacity and directs incoming requests to the server with the fewest active connections, adjusted by these weights.</p>
+<p><img decoding="async" loading="lazy" alt="Weighted Least Connections" src="/system-design-101/assets/images/weighted_least_connections-cacbcd8d2521dd8a0f944170033f0225.gif" width="1000" height="600" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="ip-hash">IP Hash<a href="#ip-hash" class="hash-link" aria-label="Direct link to IP Hash" title="Direct link to IP Hash">​</a></h2>
+<p>A load balancing algorithm that uses a hash function to map a client&#x27;s IP address to a specific server</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="example">Example<a href="#example" class="hash-link" aria-label="Direct link to Example" title="Direct link to Example">​</a></h3>
+<p>Suppose you have three servers (Server A, Server B, and Server C) and a client with the IP address 192.168.1.10. The load balancer applies a hash function to this IP address, resulting in a hash value. If the hash value is 2 and there are three servers, the load balancer routes the request to Server C (2 % 3 = 2).</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pros-3">Pros<a href="#pros-3" class="hash-link" aria-label="Direct link to Pros" title="Direct link to Pros">​</a></h3>
+<ul>
+<li>Keeps client sessions on the same server.</li>
+<li>Simple and easy to implement.</li>
+<li>Predictable routing based on IP.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cons-3">Cons<a href="#cons-3" class="hash-link" aria-label="Direct link to Cons" title="Direct link to Cons">​</a></h3>
+<ul>
+<li>Can cause uneven load if IPs aren’t distributed evenly.</li>
+<li>Adding/removing servers disrupts client-server mapping.</li>
+<li>Limited Flexibility ignores server load and capacity.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-cases-3">Use Cases<a href="#use-cases-3" class="hash-link" aria-label="Direct link to Use Cases" title="Direct link to Use Cases">​</a></h3>
+<ul>
+<li><strong>Stateful Applications</strong>: Ideal for applications where maintaining session persistence is important, such as online shopping carts or user sessions.</li>
+<li><strong>Geographically Distributed Clients</strong>: Useful when clients are distributed across different regions and consistent routing is required.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="IP Hash" src="/system-design-101/assets/images/ip_hash-ec0eb7526e3a1dc1619d82ce7aea2134.gif" width="1000" height="600" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="least-response-time">Least Response Time<a href="#least-response-time" class="hash-link" aria-label="Direct link to Least Response Time" title="Direct link to Least Response Time">​</a></h2>
+<p>A load balancing algorithm that directs incoming requests to the server with the lowest average response time.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="how-it-works">How it works<a href="#how-it-works" class="hash-link" aria-label="Direct link to How it works" title="Direct link to How it works">​</a></h3>
+<ol>
+<li>The load balancer monitors server response times.</li>
+<li>It assigns each new request to the server with the lowest average response time.</li>
+<li>Assignment is adjusted dynamically based on real-time performance.</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pros-4">Pros<a href="#pros-4" class="hash-link" aria-label="Direct link to Pros" title="Direct link to Pros">​</a></h3>
+<ul>
+<li>Directs requests to the fastest server.</li>
+<li>Dynamic Load Balancing, adapts to changing server performance.</li>
+<li>Effective Resource Utilization, helps in better utilization of server resources by directing traffic to servers that can respond quickly.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cons-4">Cons<a href="#cons-4" class="hash-link" aria-label="Direct link to Cons" title="Direct link to Cons">​</a></h3>
+<ul>
+<li>More complex to implement.</li>
+<li>Adds monitoring overhead.</li>
+<li>Can rebalance too often if response times fluctuate.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-cases-4">Use Cases<a href="#use-cases-4" class="hash-link" aria-label="Direct link to Use Cases" title="Direct link to Use Cases">​</a></h3>
+<ul>
+<li><strong>Real-Time Applications:</strong> Ideal for applications where low latency and fast response times are critical, such as online gaming, video streaming, or financial trading platforms.</li>
+<li><strong>Web Services:</strong> Useful for web services and APIs that need to provide quick responses to user requests.</li>
+<li><strong>Dynamic Environments:</strong> Suitable for environments with varying loads and server performance.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Least Response Time" src="/system-design-101/assets/images/least_response_time-6d76fd73e353938efadc0cd0bd59912d.gif" width="1000" height="600" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="random">Random<a href="#random" class="hash-link" aria-label="Direct link to Random" title="Direct link to Random">​</a></h2>
+<p>Is a simple algorithm that distributes incoming requests to servers randomly. Instead of following a fixed sequence or using performance metrics, the load balancer selects a server at random to handle each request. This method can be effective in scenarios where the load is relatively uniform and servers have similar capacities.</p>
+<p>Suppose we have three servers: Server A, Server B, and Server C. When a new request arrives, the load balancer randomly chooses one of these servers to handle the request. Over time, if the randomness is uniform, each server should receive approximately the same number of requests.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="pros-5">Pros<a href="#pros-5" class="hash-link" aria-label="Direct link to Pros" title="Direct link to Pros">​</a></h3>
+<ul>
+<li><strong>Simplicity</strong>: Very easy to implement and understand, requiring minimal configuration.</li>
+<li><strong>No State Maintenance</strong>: The load balancer does not need to track the state or performance of servers, reducing overhead.</li>
+<li><strong>Uniform Distribution Over Time</strong>: If the random selection is uniform, the load will be evenly distributed across servers over a long period.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="cons-5">Cons<a href="#cons-5" class="hash-link" aria-label="Direct link to Cons" title="Direct link to Cons">​</a></h3>
+<ul>
+<li><strong>No Load Awareness</strong>: Does not consider the current load or capacity of servers, which can lead to uneven distribution if server performance varies.</li>
+<li><strong>Potential for Imbalance</strong>: In the short term, random selection can lead to an uneven distribution of requests.</li>
+<li><strong>No Session Affinity</strong>: Requests from the same client may be directed to different servers, which can be problematic for stateful applications.</li>
+<li>Security systems that rely on detecting anomalies (e.g., to mitigate DDoS attacks) might find it slightly more challenging to identify malicious patterns if a Random algorithm is used, due to the inherent unpredictability in request distribution. This could potentially dilute the visibility of attack patterns.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-cases-5">Use Cases<a href="#use-cases-5" class="hash-link" aria-label="Direct link to Use Cases" title="Direct link to Use Cases">​</a></h3>
+<ul>
+<li><strong>Homogeneous Environments</strong>: Suitable for environments where servers have similar capacity and performance.</li>
+<li><strong>Stateless Applications</strong>: Works well for stateless applications where each request can be handled independently.</li>
+<li><strong>Simple Deployments</strong>: Ideal for simple deployments where the complexity of other load balancing algorithms is not justified.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Random" src="/system-design-101/assets/images/random-650dea51355f5805ef2b6040be229e8f.gif" width="1000" height="600" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="least-bandwidth">Least Bandwidth<a href="#least-bandwidth" class="hash-link" aria-label="Direct link to Least Bandwidth" title="Direct link to Least Bandwidth">​</a></h2>
+<p>A load balancing algorithm that directs incoming requests to the server currently handling the least amount of network traffic.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="pros-6">Pros<a href="#pros-6" class="hash-link" aria-label="Direct link to Pros" title="Direct link to Pros">​</a></h2>
+<ul>
+<li><strong>Dynamic Load Balancing</strong>: Continuously adjusts to the current network load, ensuring optimal distribution of traffic.</li>
+<li><strong>Prevents Overloading</strong>: Helps in preventing any single server from being overwhelmed with too much data traffic, leading to better performance and stability.</li>
+<li><strong>Efficient Resource Utilization</strong>: Ensures that all servers are utilized more effectively by balancing the bandwidth usage.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="cons-6">Cons<a href="#cons-6" class="hash-link" aria-label="Direct link to Cons" title="Direct link to Cons">​</a></h2>
+<ul>
+<li><strong>Complexity</strong>: More complex to implement compared to simpler algorithms like Round Robin, as it requires continuous monitoring of bandwidth usage.</li>
+<li><strong>Overhead</strong>: Monitoring bandwidth and dynamically adjusting the load can introduce additional overhead.</li>
+<li><strong>Short-Term Variability</strong>: Bandwidth usage can fluctuate in the short term, potentially causing frequent rebalancing.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="use-cases-6">Use Cases<a href="#use-cases-6" class="hash-link" aria-label="Direct link to Use Cases" title="Direct link to Use Cases">​</a></h3>
+<ul>
+<li><strong>High Bandwidth Applications</strong>: Ideal for applications with high bandwidth usage, such as video streaming, file downloads, and large data transfers.</li>
+<li><strong>Content Delivery Networks (CDNs)</strong>: Useful for CDNs that need to balance traffic efficiently to deliver content quickly.</li>
+<li><strong>Real-Time Applications</strong>: Suitable for real-time applications where maintaining low latency is critical.</li>
+</ul>
+<p><img decoding="async" loading="lazy" alt="Least Bandwidth" src="/system-design-101/assets/images/least_bandwidth-d61ddbf393f160ae44c99fc0656a18f1.gif" width="1000" height="600" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="custom-load">Custom Load<a href="#custom-load" class="hash-link" aria-label="Direct link to Custom Load" title="Direct link to Custom Load">​</a></h2>
+<p>A load balancing algorithm that allows for custom logic to determine how requests are distributed among servers. This can be based on specific business rules, application requirements, or other criteria defined by the user.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="how-it-works-1">How it works<a href="#how-it-works-1" class="hash-link" aria-label="Direct link to How it works" title="Direct link to How it works">​</a></h2>
+<ol>
+<li>
+<p><strong>Define Custom Metrics</strong>: Determine the metrics that best represent the load or performance characteristics relevant to your application. These metrics can include CPU usage, memory usage, disk I/O, application-specific metrics, or a combination of several metrics.</p>
+</li>
+<li>
+<p><strong>Implement Monitoring</strong>: Continuously monitor the defined metrics on each server in the pool. This may involve integrating with monitoring tools or custom scripts that collect and report the necessary data.</p>
+</li>
+<li>
+<p><strong>Create Load Balancing Rules</strong>: Establish rules and algorithms that use the monitored metrics to make load balancing decisions. This can be a simple weighted sum of metrics or more complex logic that prioritizes certain metrics over others.</p>
+</li>
+</ol>
+<p>Dynamic Adjustment: Use the collected data and rules to dynamically adjust the distribution of incoming requests, ensuring that the traffic is balanced according to the custom load criteria.</p></div></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/system-design-101/docs/load balancing/intro"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Load balancing</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/system-design-101/docs/load balancing/challenges"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Scalability and Performance</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#round-robin" class="table-of-contents__link toc-highlight">Round Robin</a><ul><li><a href="#pros" class="table-of-contents__link toc-highlight">Pros:</a></li><li><a href="#cons" class="table-of-contents__link toc-highlight">Cons:</a></li><li><a href="#use-cases" class="table-of-contents__link toc-highlight">Use Cases</a></li></ul></li><li><a href="#least-connections" class="table-of-contents__link toc-highlight">Least Connections</a><ul><li><a href="#pros-1" class="table-of-contents__link toc-highlight">Pros:</a></li><li><a href="#cons-1" class="table-of-contents__link toc-highlight">Cons:</a></li><li><a href="#use-cases-1" class="table-of-contents__link toc-highlight">Use Cases</a></li><li><a href="#comparison-to-round-robin" class="table-of-contents__link toc-highlight">Comparison to Round Robin</a></li></ul></li><li><a href="#weighted-round-robin" class="table-of-contents__link toc-highlight">Weighted Round Robin</a><ul><li><a href="#pros-2" class="table-of-contents__link toc-highlight">Pros:</a></li><li><a href="#cons-2" class="table-of-contents__link toc-highlight">Cons:</a></li><li><a href="#use-cases-2" class="table-of-contents__link toc-highlight">Use Cases</a></li></ul></li><li><a href="#weighted-least-connections" class="table-of-contents__link toc-highlight">Weighted Least Connections</a></li><li><a href="#ip-hash" class="table-of-contents__link toc-highlight">IP Hash</a><ul><li><a href="#example" class="table-of-contents__link toc-highlight">Example</a></li><li><a href="#pros-3" class="table-of-contents__link toc-highlight">Pros</a></li><li><a href="#cons-3" class="table-of-contents__link toc-highlight">Cons</a></li><li><a href="#use-cases-3" class="table-of-contents__link toc-highlight">Use Cases</a></li></ul></li><li><a href="#least-response-time" class="table-of-contents__link toc-highlight">Least Response Time</a><ul><li><a href="#how-it-works" class="table-of-contents__link toc-highlight">How it works</a></li><li><a href="#pros-4" class="table-of-contents__link toc-highlight">Pros</a></li><li><a href="#cons-4" class="table-of-contents__link toc-highlight">Cons</a></li><li><a href="#use-cases-4" class="table-of-contents__link toc-highlight">Use Cases</a></li></ul></li><li><a href="#random" class="table-of-contents__link toc-highlight">Random</a><ul><li><a href="#pros-5" class="table-of-contents__link toc-highlight">Pros</a></li><li><a href="#cons-5" class="table-of-contents__link toc-highlight">Cons</a></li><li><a href="#use-cases-5" class="table-of-contents__link toc-highlight">Use Cases</a></li></ul></li><li><a href="#least-bandwidth" class="table-of-contents__link toc-highlight">Least Bandwidth</a></li><li><a href="#pros-6" class="table-of-contents__link toc-highlight">Pros</a></li><li><a href="#cons-6" class="table-of-contents__link toc-highlight">Cons</a><ul><li><a href="#use-cases-6" class="table-of-contents__link toc-highlight">Use Cases</a></li></ul></li><li><a href="#custom-load" class="table-of-contents__link toc-highlight">Custom Load</a></li><li><a href="#how-it-works-1" class="table-of-contents__link toc-highlight">How it works</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/system-design-101/docs/intro">Tutorial</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://stackoverflow.com/questions/tagged/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Stack Overflow<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://discordapp.com/invite/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">Discord<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://x.com/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">X<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/system-design-101/blog">Blog</a></li><li class="footer__item"><a href="https://github.com/facebook/docusaurus" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 My Project, Inc. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
