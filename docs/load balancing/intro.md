@@ -2,11 +2,31 @@
 sidebar_position: 3
 ---
 
-# Load balancing (in progress)
+# Load balancing
 Helps distribute incoming requests and traffic evenly across multiple servers.
 
 The main goal of load balancing is to ensure high availability, reliability, and performance by avoiding overloading a single server and avoiding downtime.
 
+## How it works
+1. The load balancer receives a request from the client.
+2. It selects a backend server using a load-balancing algorithm.
+3. The request is forwarded to the chosen server.
+4. The server processes the request and sends the response back to the load balancer.
+5. The load balancer returns the response to the client.
+
+```mermaid
+sequenceDiagram
+  participant Client
+  participant LoadBalancer
+  participant Server
+
+  Client->>LoadBalancer: Sends request
+  LoadBalancer->>LoadBalancer: Evaluate request (algorithm, health, etc.)
+  LoadBalancer->>Server: Forward request
+  Server->>Server: Process request
+  Server->>LoadBalancer: Send response
+  LoadBalancer->>Client: Return response
+```
 ## Each Layer
 Between the user and the web servers.
 
@@ -67,7 +87,3 @@ graph LR
         Server->>Client: Finished (encrypted)
         Note over Client,Server: Secure session established 🔒
     ```
-## Load Balancing Algorithms
-- **Round Robin**: Distributes requests sequentially to each server in the pool. Simple
-
-will update
